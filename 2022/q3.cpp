@@ -5,43 +5,11 @@
 // This is a working solution, however it is very inefficient. I will come back to optimize this.
 
 using namespace std;
-int iterations = 0;
-vector<string> rebuild(vector<string> output, vector<string> preferred_spots, string current, string letter, int level, int index)
-{
-    if (output.size() > index){
-        return output;
-    }
-    current += letter;
-    if (level >= preferred_spots.size())
-    {
-        output.push_back(current);
-        return output;
-    }
-    // vector<string> strings;
-    for (size_t i = 0; i < preferred_spots[level].length(); i++)
-    {
-        iterations++;
-        letter = preferred_spots[level][i];
-        output = rebuild(output, preferred_spots, current, letter, level + 1, index);
-
-        // OH MY GOD I TRIED TO DO THIS BY APPENDING IT BUT IT NEVER WORKED I DON'T KNOW HOW
-        // BUT SETTING OUTPUT TO THE THING WORKS NOW I HAVE SPENT SO LONG ON THIS PROBLEM FINALLY
-
-        // vector<string> vec = rebuild(output, preferred_spots, current, letter, level + 1);
-        // output.insert(output.end(), vec.begin(), vec.end());
-        // for (size_t x = 0; x < vec.size(); ++x){
-        //     cout << " " << vec[x];
-        // }
-        
-    }
-    cout << iterations << output.size();
-    return output;
-}
 
 int main(){
 
-    string input; // the parking arragement to input
-    int index; // Index of final preference to find
+    string input = "cabd"; // the parking arragement to input
+    int index = 5; // Index of final preference to find
     cin >> input >> index;
 
     string taken(input.size(), ' ');
@@ -77,26 +45,35 @@ int main(){
 
     vector<string> preferred_spots;
 
-
+    int total = 1;
     string temp;
 
     for (size_t i = 0; i < preferences_input.size(); ++i){
         temp.clear();
-        for (size_t u = 0; u < preferences_input[i].length(); u++){
+        for (size_t u = 0; u < preferences_input[i].length(); u++)
+        {
             if (preferences_input[i][u] != ' '){
                 letter = 65 + u;
                 temp += letter;
             }
         }
         preferred_spots.push_back(temp);
+        total *= preferred_spots[i].length();
+        cout << preferred_spots[i] << endl;
     }
 
-    vector<string> output;
-    output = rebuild(output, preferred_spots, "", "", 0, index);
+    string output;
+    cout << "Total: " << total << endl;
+    for (size_t i = 0; i < preferred_spots.size(); ++i)
+    {
+        // Modulus divide index to remove repeats, then multiply by possible options, divide by total again to select character
+        output += preferred_spots[i][((index - 1) % (total)) * preferred_spots[i].length() / total];
+        cout << ((index -1) / (total / preferred_spots[i].length())) << endl;
+        total /= preferred_spots[i].length();
+        // I wrote this at 1am, am not entirely sure how it works either but it passes 9 test cases and fails 2
+    }
 
-    // for (size_t i = 0; i < output.size(); ++i){
-    //     cout << i << " " << output[i] << endl;
-    // }
 
-    cout << output[index-1] << endl;
+    cout << output << endl;
+    
 }
