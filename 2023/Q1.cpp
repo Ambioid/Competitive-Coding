@@ -6,6 +6,13 @@
 
 using namespace std;
 
+/* Algorithm Explained: 
+Simple Greedy algorithm with 2 loops: First it loops up to the max value (value of the target)
+and then it works backwards from there, subtracting the maximum value it can subtract, and then
+moving on to the next. This is efficient and runs in O(n) time, and is guaranteed to find shortest
+sequence because it'll always target the largest value first. This is a greedy algorithm.
+    */
+
 int main(){
     while(true){
     int target{};
