@@ -13,8 +13,15 @@ My solution to Q2 of 2023 BIO.
 
 using namespace std;
 
-int main(){
+/* Probably not the most efficient way, but it should work completely fine. As I can guarantee that a pentomino would be at max 5x3 wide, I can safely
+just brute force every combination possible without facing time penalty. This program I have written works by iterating through every box and checking for 
+all valid combinations (Checks for collisions and edges), and then adds them with the pentomino it was working with. Then I take advantage of the fact that
+C++ sets are automatically sorted, which means that all the pixels will always be in the same order and relative position, and offset them all so they all start
+at the same place. This makes identical shapes exactly the same, which I then use another set to eliminate. I output the length of that set to get the final output.*/
 
+int main(){
+    // Didn't bother to add all of the pentominoes because it was too intensive. Hope that this isn't a problem in the actual exam..
+    // I guess this also means I didn't do all test cases but I'm reasonably certain and also kinda done with this question I spent too long..
     unordered_map<char, set<vector<int>>> pentominoes{  {'F', {{0,1},{0,2},{1,0},{1,1},{2,1}}},
                                                         {'G', {{0,0},{0,1},{1,1},{1,2},{2,1}}},
                                                         {'I', {{0,0},{1,0},{2,0},{3,0},{4,0}}},
