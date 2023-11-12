@@ -13,61 +13,33 @@ using namespace std;
 int main(){
     while (1){
      
-    deque< vector<vector<int>>> to_check{};
+    deque< vector<vector<int>>> to_check = {{{}, {}, {}, {}}};
     vector<vector<int>> goal{};
     deque<int> prev_distance{0};
 
-    // to_check = {{{1,2,3,4}, {}, {}, {}}};
-    // goal = {{4,3,2,1}, {}, {}, {}};
-
-    // to_check = {{{}, {}, {}, {}}};
     goal = {{}, {}, {}, {}};
     vector<vector<int>> temp2{{}, {}, {}, {}};
     
-    string a, b, c, d;
-    cin >> a >> b >> c >> d;
+    string a;
 
-
-    // Annoyingly dry and repeated code to get user input but I can't think of an easier way to do this..
-    for(int i = 0; i < a.size(); i++){
-        if (a[i] == '0')break;
-        temp2[0].push_back(a[i]-'0');
-    }
-    for(int i = 0; i < b.size(); i++){
-        if (b[i] == '0')break;
-        temp2[1].push_back(b[i]-'0');
-    }
-    for(int i = 0; i < c.size(); i++){
-        if (c[i] == '0')break;
-        temp2[2].push_back(c[i]-'0');
-    }
-    for(int i = 0; i < d.size(); i++){
-        if (d[i] == '0')break;
-        temp2[3].push_back(d[i]-'0');
+    // Get input into the first thing to check
+    for(int y{0}; y < 4; y++){
+        cin >> a;
+        for(int x = 0; x < a.size(); x++){
+            if (a[x] == '0')break;
+            to_check[0][y].push_back(a[x]-'0');
+        }
     }
 
-
-    to_check = {temp2};
-    
-    cin >> a >> b >> c >> d;
-    for(int i = 0; i < a.size(); i++){
-        if (a[i] == '0')break;
-        goal[0].push_back(a[i]-'0');
-    }
-    for(int i = 0; i < b.size(); i++){
-        if (b[i] == '0')break;
-        goal[1].push_back(b[i]-'0');
-    }
-    for(int i = 0; i < c.size(); i++){
-        if (c[i] == '0')break;
-        goal[2].push_back(c[i]-'0');
-    }
-    for(int i = 0; i < d.size(); i++){
-        if (d[i] == '0')break;  
-        goal[3].push_back(d[i]-'0');
+    // Get the input into desired goal.
+    for(int y{0}; y < 4; y++){
+        cin >> a;
+        for(int x= 0; x < a.size(); x++){
+            if (a[x] == '0')break;
+            goal[y].push_back(a[x]-'0');
+        }
     }
 
-    
     // std::cout << "Printing temp front:" << endl;
     // for(auto& iter1 : temp2){
     //         for(auto& iter2 : iter1){
@@ -116,10 +88,6 @@ int main(){
 
                 to_check.push_back(temp);
                 prev_distance.push_back(current_distance+1);
-
-                
-                // Add a distance
-                // Add the new thing to check
 
                 // +1 to distance
             }
