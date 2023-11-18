@@ -1,79 +1,62 @@
+#include <algorithm>
+#include <cstdio>
 #include <iostream>
 #include <string>
 #include <vector>
 
-// This is a working solution, however it is very inefficient. I will come back to optimize this.
-
 using namespace std;
 
-int main(){
+int main() {
+    while (true) {
+        string arragement{"abcd"};
+        long long list_spot{24};
 
-    string input = "cabd"; // the parking arragement to input
-    int index = 5; // Index of final preference to find
-    cin >> input >> index;
+        cin >> arragement >> list_spot;
 
-    string taken(input.size(), ' ');
-    char letter;
-    vector<string> preferences_input;
-    int x;
+        string output{};
 
-    for (int i; i < input.length(); i++){
-        int index = input.find(97+i);
-        // cout << index << endl;
+        vector<vector<long long>> possible_spots(arragement.size());
 
-        letter = 97 + i;
-        taken[index] = letter;
+        vector<char> temp(arragement.size(), '_');
 
-        x = 1;
+        for (long long i{0}; i < arragement.size(); i++) {
+            long long pos{arragement.find('a' + i)};
+            temp.at(pos) = 'a' + i;
 
-        while ((index - x >= 0) && (taken[index - x] != ' '))
-        {
-            taken[index-x] = letter;
-            x++;
-        }
+            long long count{1};
+            while (((pos - count) >= 0) && (temp.at(pos - count) != '_')) {
+                temp.at(pos - count) = 'a' + i;
+                count += 1;
+            }
 
-
-        preferences_input.push_back(taken);
-
-        for (int u = 0; u < preferences_input[i].length(); u++){
-            if (preferences_input[i][u] != letter){
-                preferences_input[i][u] = ' ';
+            for (long long iter{0}; iter < arragement.size(); iter++) {
+                // cout << "B:" << temp.at(iter) << ":A";
+                if (temp.at(iter) == ('a' + i)) {
+                    possible_spots.at(i).push_back(iter);
+                }
             }
         }
-    }
-    
 
-    vector<string> preferred_spots;
-
-    int total = 1;
-    string temp;
-
-    for (size_t i = 0; i < preferences_input.size(); ++i){
-        temp.clear();
-        for (size_t u = 0; u < preferences_input[i].length(); u++)
-        {
-            if (preferences_input[i][u] != ' '){
-                letter = 65 + u;
-                temp += letter;
-            }
+        long reoccurs{1};
+        for (long long i{0}; i < possible_spots.size(); i++) {
+            reoccurs *= possible_spots.at(i).size();
         }
-        preferred_spots.push_back(temp);
-        total *= preferred_spots[i].length();
-        cout << preferred_spots[i] << endl;
+
+        for (long long car{0}; car < possible_spots.size(); car++) {
+            long long max_size = possible_spots.at(car).size();
+            // cout << max_size << " " << reoccurs;
+            // long long t_list_spot{list_spot % max_size}
+
+            cout << char('A' + possible_spots.at(car).at(((list_spot - 1) / (reoccurs / max_size)) % max_size));
+            reoccurs /= max_size;
+        }
+
+        cout << "\n";
     }
-
-    string output;
-    cout << "Total: " << total << endl;
-    for (size_t i = 0; i < preferred_spots.size(); ++i)
-    {
-        // Modulus divide index to remove repeats, then multiply by possible options, divide by total again to select character
-        output += preferred_spots[i][((index - 1) % (total)) * preferred_spots[i].length() / total];
-        cout << ((index -1) / (total / preferred_spots[i].length())) << endl;
-        total /= preferred_spots[i].length();
-        // I wrote this at 1am, am not entirely sure how it works either but it passes 9 test cases and fails 2
-    }
-
-
-    cout << output << endl;
-    
 }
+
+// Passes every test case basically instantly. 25/25 points. The last 2 caught me, but switching to longs fixed the issue. ALWAYS CHECK THE INPUT RANGE!!
+// Solving the actual problem took me like 45m (but should have been faster really), but figuring out how to efficiently output the ith permutation
+// took me like an hour to figure out. waaay too long. Seriously what even was that lmao
+
+
