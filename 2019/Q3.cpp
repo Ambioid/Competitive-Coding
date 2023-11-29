@@ -41,7 +41,7 @@ int main() {
                     // cout  << "Front and end: \n"<< *strings.front().begin() << ", " << *not_in_strings.front().rbegin() <<"\n";
 
                     // if letter is smaller than smallest currently, or larger than the largest currently.
-                    if ((letter < *strings.front().begin()) || (letter > *not_in_strings.front().rbegin())) {
+                    if ((letter < *strings.front().begin()) || (letter >= *not_in_strings.front().rbegin())) {
                         strings.push_back(strings.front());
                         strings.back().insert(letter);
                         not_in_strings.push_back(not_in_strings.front());
@@ -71,8 +71,8 @@ int main() {
     }
 }
 
-// Fails:  14 N, 18 QPON, and 18 R.
-// 18/24. Not a failure, but can be much better.
+// Fails: 4 AB, 14 N, 18 FRN, 18 QPON, and 18 R.
+// 15/24. Not a failure, but can be much better.
 // Completed mostly within about 1h 30m?
 // Approach is just a BFS of possible string setups. Not very efficient. Too much string copying.
 // Also just incorrect occasionally. Will have to revisit.
