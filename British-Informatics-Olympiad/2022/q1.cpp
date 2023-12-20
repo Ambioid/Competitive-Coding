@@ -2,99 +2,84 @@
 #include <string>
 
 using namespace std;
-
+typedef long long ll;
 string decrypt(string str2) {
     char n;
-    for (int i = str2.length()-1; i > 0 ; i--){
-        n = str2[i]-str2[i-1] + 64;
+    for (int i = str2.length() - 1; i > 0; i--) {
+        n = str2[i] - str2[i - 1] + 64;
 
-        if (n < 65){
+        if (n < 65) {
             n += 26;
-            }
+        }
         // cout << n << endl;
         str2[i] = n;
-
     }
     return str2;
 }
 string encrypt(string str) {
     char n;
-    for (int i = 1; i < str.length(); i++){
-        n = str[i]+str[i-1] - 64;
+    for (int i = 1; i < str.length(); i++) {
+        n = str[i] + str[i - 1] - 64;
 
-        if (n > 90){
+        if (n > 90) {
             n -= 26;
-            }
+        }
         // cout << n << endl;
         str[i] = n;
-
-        
     }
     // cout << str << endl;
     return str;
 }
 
-int iterations_for_original(){
+int part_c() {
     string str = "OLYMPIAD";
     string str2 = str;
     cout << endl;
-    
+
     str2 = encrypt(str2);
     int i = 1;
-    while (str != str2){
+    while (str != str2) {
         i++;
         str2 = encrypt(str2);
     }
-    cout << str << ", " << str2 << ", " << i << endl;
+    cout << "Iterations until it returns to original: " << i << endl;
     return i;
 }
 
-int how_many_strings(){
-    int count = 0;
-    for (int i = 65; i < 91; i++)
-    {
-        str[0] = i;
-        for (int u = 65; u < 91; u++)
-        {
-            str[1] = u;
-            for (int o = 65; o < 91; o++)
-            {
-                str[2] = o;
+void part_d() {
+    cout << "Enter string to decrypt please" << endl;
 
-                string str2 = str;
-
-                str2 = encrypt(str2);
-                int encryption_count = 1;
-
-                while (str != str2)
-                {
-                    encryption_count++;
-                    str2 = encrypt(str2);
+    string str = "AAA";
+    // cin >> str;
+    ll counter = 0;
+    for (int a = 'A'; a < 'Z' + 1; a++) {
+        for (int b = 'A'; b < 'Z' + 1; b++) {
+            for (int c = 'A'; c < 'Z' + 1; c++) {
+                str = "";
+                str += (a);
+                str += (b);
+                str += (c);
+                string new_str = encrypt(str);
+                ll iterations = 1;
+                while (str != new_str) {
+                    new_str = encrypt(new_str);
+                    iterations++;
                 }
-                // cout << str << ", " << str2 << ", " << encryption_count << endl;
-
-                if (999999999999 % encryption_count == 0)
-                {
-                    count++;
-                    cout << str << ", " << encryption_count << ", " << count << endl;
+                if (999999999999ll % iterations == 0) {
+                    cout << str << endl;
+                    counter++;
                 }
             }
         }
-        cout << count << endl;
     }
-    return count;
+
+    cout << counter << endl;
 }
 
-int main()
-{
-    string str = "AAA";
-
-    cout << "Enter string to decrypt please" << endl;;
-    cin >> str;
-
-    cout << decrypt(str) << endl;
-    
-    
-    
+int main() {
+    string input{};
+    cin >> input;
+    cout << decrypt(input) << endl;  //
+    // part_c();
+    // part_d();
 }
-
