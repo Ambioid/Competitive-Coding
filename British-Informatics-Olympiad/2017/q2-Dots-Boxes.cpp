@@ -176,6 +176,8 @@ to debug it :(... I also missed the clause at the front saying you can get chain
 
 This was quite the complex thing, but actually I'd say it could've been much worse. Or maybe I'm just getting used to solving these questionable
 questions lmao
+
+I'd like to add - These Q2s are not like normal competitive programming questions, there's no crazy algorithm, it's just a debugging problem.
 */
 
 int main() {
