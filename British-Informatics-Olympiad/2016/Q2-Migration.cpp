@@ -127,8 +127,3 @@ int main() {
 }
 
 // Took me about one and a half hour to do EVERYTHING on this file. Not bad, but I think I need to cut this down even further.
-/*
-
-This one was pretty easy actually. Just have a set of
-
-*/

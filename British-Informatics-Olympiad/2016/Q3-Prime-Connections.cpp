@@ -64,6 +64,7 @@ void part_a() {
     }
 }
 
+
 void part_b() {
     ll upper_limit{20}, start{2}, end{19};
     // cin >> upper_limit >> start >> end;
@@ -89,7 +90,7 @@ void part_b() {
     dp[0] = 1;
     for (int i = 0; i < prime_count; i++) {
         for (int j = i + 1; j < prime_count; j++) {
-            dp[j] += dp[i] - i;
+            dp[j] += dp[i];
         }
         cout << dp[i] << " ";
     }
@@ -177,3 +178,22 @@ int main() {
     // part_c(); // ALSO WRONGGG!!!
     // Part d: CORRECT!!
 }
+
+/*
+
+I originally got this completely wrong within my trial of this, because the wording confused me. I thought
+that only the starting and end points needed to be prime, and didn't realize that every other number in
+the path also had to be prime. Therefore, wrong program.
+
+But once I knew the problem it was very easy to fix. I just rewrote it. I used the VERY FAMOUS prime sieve
+algorithm to derive all the prime numbers in O(nlogn) time, then using this list of primes, I just did an
+easy BFS (with memoization) to search thorugh all possibilities until I finally got the amount of iterations
+to any other given prime.
+
+The prime sieve is kinda slow, it's like 20% of the runtime to just get the primes, but there's no faster way.
+This solution is within the 1 second runtime anyways. I feel like a greedy solution would work for the search,
+but not worth risking to find out.
+
+The side questions make me question life a little. No idea how to solve. Other than d. That one was obvious.
+
+*/
