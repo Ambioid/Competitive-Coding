@@ -10,16 +10,6 @@ void part_a() {
 
     vector<bool> odd_numbers(500, true);
 
-    // for (int i = 3; i < odd_numbers.size(); i += 2) {
-    //     if (odd_numbers[i] == true) {
-    //         for (int x = i; x < odd_numbers.size(); x += i) {
-    //             odd_numbers[i] = false;
-    //             // cout << x << ln;
-    //         }
-    //         cout << i << ": " << odd_numbers[i] << ln;
-    //     }
-    // }
-
     vector<int> numbers(10000);
     for (int i = 0; i < numbers.size(); i++) numbers[i] = i * 2 + 1;
     // for (int i = 0; i < numbers.size(); i++) cout << numbers[i] << ln;
@@ -42,7 +32,13 @@ void part_a() {
     }
     cout << lesser_than_target << " " << larger_than_target << ln;
 }  // Done in 30 mins. Passes all test cases.
+/*
 
+Easy and simple algorithm. Just make a list of odd numbers and do the operation exactly as requested by the question. Remove all
+the numbers whose index is a multiple of the value of the current odd number. Took me longer than normal because I attempted to
+use a set, then a vector of booleans, and these incorrect approaches wasted a lot of good time :(. Otherwise pretty good.
+
+*/
 
 int main() {
     freopen("inputs/q1.txt", "r", stdin);

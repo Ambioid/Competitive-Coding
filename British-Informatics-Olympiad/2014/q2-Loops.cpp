@@ -140,6 +140,18 @@ void part_a() {
 }  // Took me 70 mins to write. have 1h 20m left.
 // I did the brute force way of writing it - Wrote every combination for tiles. Tedious, but effective.Passes all test cases.
 
+/*
+
+Very easy algorithm. Iterate through every single sqaure. Run a BFS starting at that sqaure to check for adjacent connected ones.
+If there are some adjacent and connected, keep exploring through those as well. Repeat until the entire loop has been exhausted without
+and disconnects, and mark each tile as globally checked to avoid double counting. If there *are* disconnects, then return nothing.
+If the square has already been checked, just don't run BFS. If you've exhausted the entire loop, then that means it's valid. At that
+point just return the loop size as it is valid. Else do nothing. Do this for every sqaure and it'll be done.
+
+Easy.
+
+*/
+
 int main() {
     freopen("inputs/q2.txt", "r", stdin);
     part_a();
