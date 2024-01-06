@@ -31,7 +31,7 @@ BIO practice. This is a collection of all my practice and solutions for previous
 | 11   |      |      |      |
 | 12   |      |      |      |
 | 13   |      |      |      |
-| 14   |      |      |      |
+| 14   | 🟢   | 🟢   | 🔷   |
 | 15   | 🟨   | ???  | 🟢   |
 | 16   | ???  | 🟢   | 🟢   |
 | 17   | 🟢   | 🟢   | 🟢   |
