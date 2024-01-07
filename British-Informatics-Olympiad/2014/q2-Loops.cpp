@@ -150,6 +150,9 @@ point just return the loop size as it is valid. Else do nothing. Do this for eve
 
 Easy.
 
+For the part starting from line 34: I could've implemented a less DRY way of doign it where I could reuse code, or even just write
+it in a more efficient manner, through perhaps a mapping instead of THAT. However what I did works, so I'll count this a W.
+
 */
 
 int main() {
